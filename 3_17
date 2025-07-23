@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+x1_range = (-1.0, 2.0)
+x2_range = (-1.0, 2.0)
+test_point = (2.0, 0.10578)
+x1 = np.linspace(x1_range[0], x1_range[1], 50)
+x2 = np.linspace(x2_range[0], x2_range[1], 50)
+X1, X2 = np.meshgrid(x1, x2)
+Y = np.cos(X1) * np.sin(X2)
+
+
+fig = plt.figure(figsize=(12, 10))
+
+
+ax1 = fig.add_subplot(221, projection='3d')
+ax1.plot_surface(X1, X2, Y, cmap='viridis')
+ax1.set_title('3D поверхность')
+
+
+ax2 = fig.add_subplot(222)
+ax2.contourf(X1, X2, Y, 20, cmap='viridis')
+ax2.set_title('Вид сверху')
+ax2.set_aspect('equal')
+
+
+ax3 = fig.add_subplot(223)
+ax3.plot(x1, np.cos(x1) * np.sin(test_point[1]))
+ax3.set_title(f'f(x1) при x2={test_point[1]:.2f}')
+ax3.grid(True)
+
+
+ax4 = fig.add_subplot(224)
+ax4.plot(x2, np.cos(test_point[0]) * np.sin(x2))
+ax4.set_title(f'f(x2) при x1={test_point[0]:.2f}')
+ax4.grid(True)
+
+plt.tight_layout()
+plt.show()
