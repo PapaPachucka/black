@@ -1,0 +1,21 @@
+import math
+import matplotlib.pyplot as plt
+import json 
+
+def f(x):
+    A = 1.25313
+    return (0.5 + math.cos(math.sin(abs(x - A))) - 0.5) / (1 + 0.001 * (x**4 + A**2))
+
+x = [i * 0.5 for i in range(-200, 201)]
+y = [f(xi) for xi in x]
+
+data = {"x": x, "y": y}  
+with open("graph_data.json", "w") as file:
+    json.dump(data, file, indent=4) 
+
+plt.plot(x, y)
+plt.title("График функции")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.grid(True)
+plt.show()
